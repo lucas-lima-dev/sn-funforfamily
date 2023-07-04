@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import httpStatus from "http-status";
 import postService from "@/services/posts-service";
+import { Post } from "@/protocols";
 
 async function createPost(req: Request, res: Response, next: NextFunction) {
-    const { url, description } = req.body;
-    const user_id = res.locals.user_id;
+    const { url, description } = req.body as Post;
+    const user_id: number = res.locals.user_id as number;
 
     try {
         const createdPost = await postService.createPost({ url, description, user_id });
@@ -27,8 +28,8 @@ async function readPost(req: Request, res: Response, next: NextFunction){
 }
 
 async function updatePost(req: Request, res: Response, next: NextFunction){
-    const user_id = res.locals.user_id;
-    const { id } = req.params;
+    const user_id: number = res.locals.user_id as number;
+    const { id } = req.params as { id: string };
     const { description } = req.body as { description: string };
     
 
@@ -41,8 +42,8 @@ async function updatePost(req: Request, res: Response, next: NextFunction){
 }
 
 async function deletePost(req: Request, res: Response, next: NextFunction){
-    const user_id = res.locals.user_id;
-    const { id } = req.params;
+    const user_id: number = res.locals.user_id as number;
+    const { id } = req.params as { id: string };
 
     try {
         await postService.deletePost( Number(id), Number(user_id) );

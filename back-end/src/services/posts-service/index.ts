@@ -1,11 +1,12 @@
 import { badRequestError, forBiddenError } from "@/errors";
+import { CreatePost } from "@/protocols";
 import postRepository from "@/repositories/posts-repository";
 import urlMetadata from "url-metadata";
 
 async function createPost({ url, description, user_id }: any) {
   const meta = await urlMetadata(url);
 
-  const data = {
+  const data: CreatePost = {
     user_id,
     description,
     url,
@@ -38,7 +39,7 @@ async function updatePost( id: number, description: string, user_id:number) {
   return updatedPost;
 }
 
-async function deletePost( id: number, user_id:number ) {
+async function deletePost( id: number, user_id:number ): Promise<void> {
   const post = await postRepository.readPostById(id);
 
   if (!post) {

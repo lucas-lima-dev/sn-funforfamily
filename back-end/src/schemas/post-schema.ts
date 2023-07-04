@@ -1,6 +1,7 @@
-import joi from "joi";
+import { Post } from "@/protocols";
+import joi, { ObjectSchema } from "joi";
 
-export const postSchema = joi.object({
+export const postSchema: ObjectSchema<Post> = joi.object({
     url: joi.string().uri().required(),
     description: joi.string().allow(''),
 });

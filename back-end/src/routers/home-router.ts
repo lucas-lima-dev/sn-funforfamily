@@ -3,9 +3,9 @@ import { validateBody } from '@/middlewares';
 import { postSchema } from '@/schemas/post-schema';
 import { Router } from 'express';
 
-const homeRouter = Router();
+const homeRouter: Router = Router();
 
-// homeRouter.all('/*',authenticateToken)
+
 homeRouter.get('/timeline', postController.readPost)
 homeRouter.post('/posts', validateBody(postSchema), postController.createPost)
 homeRouter.patch('/posts/:id', postController.updatePost)

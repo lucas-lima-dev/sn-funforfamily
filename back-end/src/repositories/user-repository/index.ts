@@ -1,6 +1,7 @@
 import { prisma } from '@/config';
+import { Users } from '@prisma/client';
 
-async function create(data: any) {
+async function create(data: any): Promise<Users> {
    return prisma.users.create({
         data,
     });

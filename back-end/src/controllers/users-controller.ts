@@ -1,4 +1,6 @@
+import { User } from "@/protocols";
 import userService from "@/services/users-service";
+
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 
@@ -7,8 +9,8 @@ async function createUser(
   res: Response,
   next: NextFunction
 ): Promise<any> {
-  const { username, email, password, user_url } = req.body;
-  // console.log(req.body);
+  const { username, email, password, user_url } = req.body as User;
+ 
 
   try {
     const createdUser = await userService.createUser({ username, email, password, user_url });
